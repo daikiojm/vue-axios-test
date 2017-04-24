@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <table id="app">
+  <tr>
+    <td>項目</td>
+    <td>データタイプ</td>
+    <td>データ</td>
+  </tr>
+  <tr v-for="(value, key) in infos">
+    <td>{{ key }}</td>
+    <td>{{ value[0].type }}</td>
+    <td>{{ value[0].value }}</td>
+  </tr>
+  </table>
+
+  <script>
+    axios.get('http://uedayou.net/loa/%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8D%83%E4%BB%A3%E7%94%B0%E5%8C%BA%E6%B0%B8%E7%94%B0%E7%94%BA%E4%B8%80%E4%B8%81%E7%9B%AE7.json')
+      .then(function (response) {
+        console.log(response);
+        initVue(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    function initVue(info){
+        new Vue({
+                el: '#app',
+                data: {
+                  infos: info["http://uedayou.net/loa/東京都千代田区永田町一丁目7"]
+                }
+            })
+    }
+  </script>
+
+</body>
+</html>
